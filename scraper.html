@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html ng-app="graphApp">
+    <head">
+    	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.6.1/angular-material.min.js"></script>
+        <script src="js/controllers.js"></script>
+		<style>
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+        </style>
+    </head>
+    <body ng-controller="GraphCtrl">
+    	<h1>155607091223285</h1>
+        <p>Hello, {{name}}!</p>
+        <button ng-click="getMembers()">Get Members</button>
+        <pre>{{data}}</pre>
+        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+		<script>
+			window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '1395535980749460',
+				xfbml      : true,
+				version    : 'v2.2'
+				});
+				
+				/* make the API call */
+				FB.api("/155607091223285/members", function (response) {
+					if (response && !response.error) {
+						/* handle the result */
+						$scope.groupMembers = response;
+						console.log(response);
+					}
+				});
+			};
+			
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+        </script>
+    </body>
+</html>   
